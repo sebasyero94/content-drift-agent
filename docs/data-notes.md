@@ -108,6 +108,6 @@ Method: plain `curl -sL` with a desktop browser User-Agent, 25 s timeout. All 11
 - Pricing page, Free plan: "10K session replays / month", "Up to 1M events / month", "Up to 1k MEU / month for experiments", "Up to 10 active feature flags".
 - Docs: Free "10k free Replays per month"; Growth "20k free Replays per month" (plans purchased or edited after April 2024); Enterprise "20k free Replays per month"; "By default, replays are stored for 30 days after the time of ingestion". The pricing page says Growth is "up to 500K" and the docs say 20k free, which is the included-versus-purchasable ambiguity.
 - seline (updated 2026-05-28): Free "Around 10,000 session replays per month", Growth "Up to 20,000+ replays per month".
-- The demo facts are consistent with the live page: Free replays 10K and flags 10 are the old values for PR A, and default retention 30 days (docs) is the old value for PR C. `plumbing` can encode these in the mock site. Retention 30 days appears on the docs page, not on the pricing page.
+- The demo facts are consistent with the live page: Free replays 10K and flags 10 are the old values for PR A, and default retention 30 days (docs) is the old value for PR C. `plumbing` can encode these in the mock site. Retention 30 days appears on the docs page and, per `plumbing`, also in the pricing page's comparison table.
 
 Scratch copies of the fetched HTML are not kept in the repo. `data` should fetch again and cache into `agent/profound/fixtures/` or the corpus cache.
