@@ -4,10 +4,19 @@
 <meta charset="utf-8">
 <meta name="viewport" content="width=device-width, initial-scale=1">
 <title>Demo replica: Mixpanel pricing (not the real site)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap">
 <style>
-  body { font-family: system-ui, sans-serif; margin: 0; color: #1f2430; background: #fafafa; }
-  .banner { background: #fff3b0; border-bottom: 2px solid #d4a800; padding: 10px 20px; text-align: center; font-size: 14px; }
-  main { max-width: 980px; margin: 0 auto; padding: 24px 20px 60px; }
+  :root { --ink:#1f2430; --muted:#5b6275; --accent:#6a4cf0; --accent-dark:#523bc9; --tint:#f3f0ff; --line:#e3e1ee; }
+  * { box-sizing: border-box; }
+  body { font-family: "Inter", system-ui, -apple-system, "Segoe UI", sans-serif; margin: 0; color: var(--ink); background: #fff; display: flex; flex-direction: column; line-height: 1.55; }
+  .banner { order: -2; position: sticky; top: 0; z-index: 10; background: #fff3b0; border-bottom: 3px solid #d4a800; padding: 12px 20px; text-align: center; font-size: 14px; color: #3b3000; }
+  .topnav { order: -1; display: flex; align-items: center; justify-content: space-between; gap: 12px; flex-wrap: wrap; max-width: 1080px; width: 100%; margin: 0 auto; padding: 16px 20px; }
+  .topnav .name { font-weight: 700; font-size: 18px; letter-spacing: -0.01em; }
+  .topnav nav { display: flex; gap: 20px; font-size: 14px; color: var(--muted); flex-wrap: wrap; }
+  .topnav nav a { color: inherit; text-decoration: none; }
+  .topnav nav a:hover { color: var(--accent); }
+  main { max-width: 1080px; width: 100%; margin: 0 auto; padding: 24px 20px 60px; }
   h1 { font-size: 32px; margin-bottom: 4px; }
   .hero-copy { color: #555; margin-top: 0; }
   .plans { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 24px 0; }
@@ -15,12 +24,49 @@
   .plan h2 { margin-top: 0; }
   .plan ul { padding-left: 18px; }
   table { width: 100%; border-collapse: collapse; background: #fff; }
-  th, td { border: 1px solid #ddd; padding: 8px 10px; text-align: left; font-size: 14px; }
-  details { background: #fff; border: 1px solid #ddd; border-radius: 6px; padding: 10px 14px; margin: 8px 0; }
-  footer { margin-top: 40px; font-size: 13px; color: #666; }
+  h1 { text-align: center; font-size: clamp(30px, 5vw, 46px); letter-spacing: -0.02em; margin-top: 24px; margin-bottom: 8px; }
+  .hero-copy { text-align: center; font-size: 18px; max-width: 560px; margin: 0 auto 8px; }
+  .plans { align-items: stretch; margin-top: 36px; }
+  .plan { position: relative; display: flex; flex-direction: column; padding: 28px 24px; box-shadow: 0 1px 2px rgba(31,36,48,.04), 0 8px 24px rgba(106,76,240,.06); }
+  .plan h2 { font-size: 26px; letter-spacing: -0.01em; margin-bottom: 4px; }
+  .plan > p { color: var(--muted); font-size: 15px; margin: 0 0 16px; }
+  .plan ul { list-style: none; margin: 20px 0 0; padding: 18px 0 0; border-top: 1px solid var(--line); }
+  .plan li { position: relative; padding: 5px 0 5px 26px; font-size: 15px; }
+  .plan li::before { content: ""; position: absolute; left: 4px; top: 12px; width: 6px; height: 10px; border: solid var(--accent); border-width: 0 2px 2px 0; transform: translateY(-2px) rotate(45deg); }
+  #plan-growth { border: 2px solid var(--accent); background: linear-gradient(180deg, var(--tint), #fff 45%); box-shadow: 0 12px 32px rgba(106,76,240,.18); }
+  #plan-growth::before { content: "Most popular"; position: absolute; top: -13px; left: 24px; background: var(--accent); color: #fff; font-size: 12px; font-weight: 600; letter-spacing: .03em; padding: 3px 12px; border-radius: 999px; }
+  .btn { display: inline-block; text-align: center; text-decoration: none; font-weight: 600; font-size: 15px; padding: 11px 20px; border-radius: 999px; border: 1.5px solid var(--accent); color: var(--accent); background: #fff; }
+  .btn.primary { background: var(--accent); color: #fff; }
+  .btn:hover { background: var(--accent-dark); border-color: var(--accent-dark); color: #fff; }
+  section h2 { letter-spacing: -0.01em; }
+  #compare, #features, #faq { margin-top: 56px; }
+  #compare h2, #faq h2 { text-align: center; font-size: 30px; margin-bottom: 20px; }
+  table { border: 1px solid var(--line); border-radius: 12px; overflow: hidden; border-style: hidden; box-shadow: 0 0 0 1px var(--line); }
+  th, td { border: 0; border-bottom: 1px solid var(--line); padding: 14px 16px; text-align: left; font-size: 15px; }
+  th { background: var(--tint); font-weight: 600; }
+  th:nth-child(3), td:nth-child(3) { background: rgba(106,76,240,.05); }
+  tr:last-child td { border-bottom: 0; }
+  td:first-child { font-weight: 600; }
+  #features { background: var(--tint); border-radius: 16px; padding: 12px 28px 20px; }
+  #features h2 { font-size: 22px; margin-bottom: 4px; }
+  #features p { color: var(--muted); margin-top: 4px; }
+  #faq { max-width: 760px; margin-left: auto; margin-right: auto; }
+  details { background: #fff; border: 1px solid var(--line); border-radius: 12px; padding: 4px 20px; margin: 10px 0; }
+  summary { cursor: pointer; font-weight: 600; padding: 14px 0; list-style: none; display: flex; justify-content: space-between; gap: 12px; }
+  summary::-webkit-details-marker { display: none; }
+  summary::after { content: "+"; color: var(--accent); font-size: 22px; line-height: 1; }
+  details[open] summary::after { content: "\2212"; }
+  details p { margin: 0 0 14px; color: var(--muted); }
+  footer { margin-top: 56px; font-size: 13px; color: #666; text-align: center; }
+  @media (max-width: 600px) {
+    th, td { padding: 10px 8px; font-size: 13px; }
+    #features { padding: 8px 18px 16px; }
+    .topnav nav { gap: 14px; }
+  }
 </style>
 </head>
 <body>
+<header class="topnav"><span class="name">Demo pricing page</span><nav><a href="#plans">Plans</a><a href="#compare">Compare</a><a href="#features">Features</a><a href="#faq">FAQ</a></nav></header>
 <div class="banner"><strong>DEMO REPLICA.</strong> This page is a stand-in built for a hackathon demo. It is not Mixpanel's website, and the plan limits are copied from Mixpanel's public pricing page on 2026-10-03 for illustration only. See SOURCES.md.</div>
 <main>
 <h1>Pricing (demo replica)</h1>
@@ -30,6 +76,7 @@
   <div class="plan" id="plan-free">
     <h2>Free</h2>
     <p>Free forever. No credit card required.</p>
+    <a class="btn" href="#plans">Get started</a>
     <ul>
       <li>Unlimited seats</li>
       <li>Up to 1M events / month</li>
@@ -41,6 +88,7 @@
   <div class="plan" id="plan-growth">
     <h2>Growth</h2>
     <p>Starts at $0. Higher limits, volume discounts available.</p>
+    <a class="btn primary" href="#plans">Start with Growth</a>
     <ul>
       <li>Up to 20M events / month</li>
       <li>Up to 500K session replays / month</li>
@@ -51,6 +99,7 @@
   <div class="plan" id="plan-enterprise">
     <h2>Enterprise</h2>
     <p>Let's chat. Dedicated account support.</p>
+    <a class="btn" href="#plans">Talk to sales</a>
     <ul>
       <li>Up to 1T events / month</li>
       <li>Custom session replay volumes</li>
