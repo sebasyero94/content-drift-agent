@@ -1,0 +1,95 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Demo replica: Mixpanel pricing (not the real site)</title>
+<style>
+  body { font-family: system-ui, sans-serif; margin: 0; color: #1f2430; background: #fafafa; }
+  .banner { background: #fff3b0; border-bottom: 2px solid #d4a800; padding: 10px 20px; text-align: center; font-size: 14px; }
+  main { max-width: 980px; margin: 0 auto; padding: 24px 20px 60px; }
+  h1 { font-size: 32px; margin-bottom: 4px; }
+  .hero-copy { color: #555; margin-top: 0; }
+  .plans { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 24px 0; }
+  .plan { background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 20px; }
+  .plan h2 { margin-top: 0; }
+  .plan ul { padding-left: 18px; }
+  table { width: 100%; border-collapse: collapse; background: #fff; }
+  th, td { border: 1px solid #ddd; padding: 8px 10px; text-align: left; font-size: 14px; }
+  details { background: #fff; border: 1px solid #ddd; border-radius: 6px; padding: 10px 14px; margin: 8px 0; }
+  footer { margin-top: 40px; font-size: 13px; color: #666; }
+</style>
+</head>
+<body>
+<div class="banner"><strong>DEMO REPLICA.</strong> This page is a stand-in built for a hackathon demo. It is not Mixpanel's website, and the plan limits are copied from Mixpanel's public pricing page on 2026-10-03 for illustration only. See SOURCES.md.</div>
+<main>
+<h1>Pricing (demo replica)</h1>
+<p class="hero-copy">Explore product analytics for free, then pay as you grow.</p>
+
+<section class="plans" id="plans">
+  <div class="plan" id="plan-free">
+    <h2>Free</h2>
+    <p>Free forever. No credit card required.</p>
+    <ul>
+      <li>Unlimited seats</li>
+      <li>Up to 1M events / month</li>
+      <li>10K session replays / month</li>
+      <li>Up to 1k MEU / month for experiments</li>
+      <li>Up to 10 active feature flags</li>
+    </ul>
+  </div>
+  <div class="plan" id="plan-growth">
+    <h2>Growth</h2>
+    <p>Starts at $0. Higher limits, volume discounts available.</p>
+    <ul>
+      <li>Up to 20M events / month</li>
+      <li>Up to 500K session replays / month</li>
+      <li>Up to 100k MEU / month for experiments</li>
+      <li>Up to 50 active feature flags</li>
+    </ul>
+  </div>
+  <div class="plan" id="plan-enterprise">
+    <h2>Enterprise</h2>
+    <p>Let's chat. Dedicated account support.</p>
+    <ul>
+      <li>Up to 1T events / month</li>
+      <li>Custom session replay volumes</li>
+      <li>Custom experiment and feature flag volumes</li>
+      <li>Custom data and replay retention policy</li>
+    </ul>
+  </div>
+</section>
+
+<section id="compare">
+  <h2>Compare plans</h2>
+  <table>
+    <tr><th>Usage</th><th>Free</th><th>Growth</th><th>Enterprise</th></tr>
+    <tr><td>Monthly events</td><td>Up to 1M</td><td>Up to 20M</td><td>Up to 1T</td></tr>
+    <tr><td>Session replays</td><td>10K monthly sessions</td><td>Up to 500K monthly sessions</td><td>Custom</td></tr>
+    <tr><td>Experiments</td><td>1k MEU / month</td><td>Up to 100k MEU / month</td><td>Custom</td></tr>
+    <tr><td>Active feature flags</td><td>Up to 10</td><td>Up to 50</td><td>Custom</td></tr>
+  </table>
+</section>
+
+<section id="features">
+  <h2>Session replay</h2>
+  <p>Watch how users move through your product, filter replays by the events you already track, and jump from any chart to the replays behind it.</p>
+  <p>Default replay retention: 30 days. Enterprise plans can set a custom retention policy.</p>
+  <h2>Feature flags</h2>
+  <p>Roll features out gradually with percentage-based rollouts and target by user properties.</p>
+</section>
+
+<section id="faq">
+  <h2>Frequently asked questions</h2>
+  <details><summary>What does the Free plan include?</summary>
+    <p>Up to 1M events a month, 10K session replays a month, and up to 10 active feature flags.</p></details>
+  <details><summary>How long are session replays stored?</summary>
+    <p>Replays are kept for 30 days by default. Enterprise plans can customize the retention period.</p></details>
+  <details><summary>Do you offer startup discounts?</summary>
+    <p>Yes. Eligible early-stage companies can get their first year free on the Startup plan.</p></details>
+</section>
+
+<footer>Demo replica for the Content Drift Agent hackathon project. Not affiliated with or published by Mixpanel.</footer>
+</main>
+</body>
+</html>
