@@ -1,0 +1,35 @@
+From 48edae6ad654f0e99df4d263bd917eb96b0bbe8a Mon Sep 17 00:00:00 2001
+From: Sebastian Yerovi <sebasyero94@gmail.com>
+Date: Sat, 3 Oct 2026 13:26:55 -0700
+Subject: [PATCH] Extend default replay retention from 30 to 60 days
+
+Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
+---
+ mock-site/index.html | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/mock-site/index.html b/mock-site/index.html
+index de3db42..dde43bb 100644
+--- a/mock-site/index.html
++++ b/mock-site/index.html
+@@ -74,7 +74,7 @@
+ <section id="features">
+   <h2>Session replay</h2>
+   <p>Watch how users move through your product, filter replays by the events you already track, and jump from any chart to the replays behind it.</p>
+-  <p>Default replay retention: 30 days. Enterprise plans can set a custom retention policy.</p>
++  <p>Default replay retention: 60 days. Enterprise plans can set a custom retention policy.</p>
+   <h2>Feature flags</h2>
+   <p>Roll features out gradually with percentage-based rollouts and target by user properties.</p>
+ </section>
+@@ -84,7 +84,7 @@
+   <details><summary>What does the Free plan include?</summary>
+     <p>Up to 1M events a month, 10K session replays a month, and up to 10 active feature flags.</p></details>
+   <details><summary>How long are session replays stored?</summary>
+-    <p>Replays are kept for 30 days by default. Enterprise plans can customize the retention period.</p></details>
++    <p>Replays are kept for 60 days by default. Enterprise plans can customize the retention period.</p></details>
+   <details><summary>Do you offer startup discounts?</summary>
+     <p>Yes. Eligible early-stage companies can get their first year free on the Startup plan.</p></details>
+ </section>
+-- 
+2.39.5 (Apple Git-154)
+

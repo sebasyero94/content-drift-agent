@@ -1,0 +1,36 @@
+name: Content Drift approval
+
+# Nothing is written until a PMM adds the label `content-approved`.
+on:
+  pull_request:
+    types: [labeled]
+
+permissions:
+  contents: write
+  pull-requests: write
+  issues: write
+
+jobs:
+  commit-checklist:
+    if: github.event.label.name == 'content-approved'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          ref: ${{ github.event.pull_request.head.ref }}
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.9"
+      - name: Build content-updates/pr-N.md from the agent's report comment
+        env:
+          GH_TOKEN: ${{ github.token }}
+          APPROVER: ${{ github.event.sender.login }}
+        run: python -m agent.github.approve "${{ github.event.pull_request.html_url }}"
+      - name: Commit the checklist
+        run: |
+          if [ -z "$(git status --porcelain content-updates)" ]; then echo "nothing to commit"; exit 0; fi
+          git config user.name "content-drift-agent"
+          git config user.email "content-drift-agent@users.noreply.github.com"
+          git add content-updates
+          git commit -m "content-updates: checklist for PR #${{ github.event.pull_request.number }} (approved by ${{ github.event.sender.login }})"
+          git push

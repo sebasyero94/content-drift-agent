@@ -1,0 +1,20 @@
+{
+  "_note": "STUB FIXTURE for testing report rendering. Not real scan output and not real Profound data.",
+  "pr": "https://github.com/OWNER/REPO/pull/1",
+  "triage": {"pr": "https://github.com/OWNER/REPO/pull/1", "verdict": "flag", "tier": "high",
+    "rationale": "STUB: the diff changes two Free plan limits that public pages state.",
+    "delta_ids": ["d1", "d2"], "confidence": 0.9,
+    "evidence": {"topic": "Session replay, experiments & feature flags",
+      "prompts": [{"id": "p1", "text": "STUB prompt text", "mixpanel_visibility": 0.033}],
+      "data_source": "cached", "fetched": "2026-10-03 (stub)"}},
+  "deltas": [
+    {"id": "d1", "entity": "Mixpanel Free plan", "attribute": "session replays per month", "old": "10,000", "new": "20,000", "unit": "replays/month", "source": {"file": "mock-site/index.html", "line": 41}, "search_terms": ["10K session replays"], "confidence": 0.9},
+    {"id": "d2", "entity": "Mixpanel Free plan", "attribute": "active feature flags", "old": "10", "new": "20", "unit": "flags", "source": {"file": "mock-site/index.html", "line": 43}, "search_terms": ["10 active feature flags"], "confidence": 0.9}],
+  "findings": [
+    {"page_url": "https://example.org/stub-third-party", "delta_id": "d1", "passage": "Free plan: around 10,000 session replays per month.", "verdict": "stale", "reason": "States the old value for the Free plan.", "proposed_edit": {"before": "around 10,000 session replays per month", "after": "around 20,000 session replays per month"}, "citation_share": 0.0209, "priority": 0.0209},
+    {"page_url": "https://mixpanel.com/pricing/", "delta_id": "d1", "passage": "10K session replays / month", "verdict": "stale", "reason": "Pricing page states the old Free value.", "proposed_edit": {"before": "10K session replays / month", "after": "20K session replays / month"}, "citation_share": 0.0009, "priority": 0.0009},
+    {"page_url": "https://docs.mixpanel.com/docs/session-replay", "delta_id": "d1", "passage": "Growth: 20k free Replays per month", "verdict": "ambiguous", "reason": "Could be Growth included volume, not Free.", "proposed_edit": null, "citation_share": 0.0005, "priority": 0.00025},
+    {"page_url": "https://example.net/current", "delta_id": "d2", "passage": "Up to 20 flags", "verdict": "current", "reason": "Already new value.", "proposed_edit": null, "citation_share": 0.01, "priority": 0}
+  ],
+  "stats": {"pages_scanned": 12, "passages_checked": 48, "stale": 2, "ambiguous": 1, "current": 1, "elapsed_seconds": 41.2}
+}

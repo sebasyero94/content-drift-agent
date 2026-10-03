@@ -1,0 +1,35 @@
+From 550bf81969261223d4915d9f0592c1a9a34484ef Mon Sep 17 00:00:00 2001
+From: Sebastian Yerovi <sebasyero94@gmail.com>
+Date: Sat, 3 Oct 2026 13:26:55 -0700
+Subject: [PATCH] Tweak hero copy and card styling (no plan changes)
+
+Co-Authored-By: Claude Sonnet 5.5 <noreply@anthropic.com>
+---
+ mock-site/index.html | 4 ++--
+ 1 file changed, 2 insertions(+), 2 deletions(-)
+
+diff --git a/mock-site/index.html b/mock-site/index.html
+index de3db42..d978672 100644
+--- a/mock-site/index.html
++++ b/mock-site/index.html
+@@ -11,7 +11,7 @@
+   h1 { font-size: 32px; margin-bottom: 4px; }
+   .hero-copy { color: #555; margin-top: 0; }
+   .plans { display: grid; grid-template-columns: repeat(auto-fit, minmax(260px, 1fr)); gap: 16px; margin: 24px 0; }
+-  .plan { background: #fff; border: 1px solid #ddd; border-radius: 8px; padding: 20px; }
++  .plan { background: #fff; border: 1px solid #cfd6e4; border-radius: 12px; padding: 20px; }
+   .plan h2 { margin-top: 0; }
+   .plan ul { padding-left: 18px; }
+   table { width: 100%; border-collapse: collapse; background: #fff; }
+@@ -24,7 +24,7 @@
+ <div class="banner"><strong>DEMO REPLICA.</strong> This page is a stand-in built for a hackathon demo. It is not Mixpanel's website, and the plan limits are copied from Mixpanel's public pricing page on 2026-10-03 for illustration only. See SOURCES.md.</div>
+ <main>
+ <h1>Pricing (demo replica)</h1>
+-<p class="hero-copy">Explore product analytics for free, then pay as you grow.</p>
++<p class="hero-copy">Start free, then scale your analytics as your team grows.</p>
+ 
+ <section class="plans" id="plans">
+   <div class="plan" id="plan-free">
+-- 
+2.39.5 (Apple Git-154)
+
