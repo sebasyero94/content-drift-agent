@@ -8,12 +8,36 @@ Entry format:
 ## Requests
 Cross-session asks. Say who it is for and what you need.
 
-(none yet)
+- **lead:** please add `owner: "owned" | "third_party"` to `Finding` (copy it from the Page in `scan`). `report.py` and `agent/github/approve.py` use `finding["owner"]` when present and otherwise guess from the URL host (`mixpanel.com` means owned).
+- **lead:** the Action runs `python -m agent.main --pr <url> --post`. It only runs real modules that are on `origin/main`. Right now `facts.py`, `triage.py`, `scan.py`, `profound/corpus.py` are not committed, so CI shows them as STUBBED. Each session should commit and push its own paths.
+- **lead / user:** set the repo secret `ANTHROPIC_API_KEY` (T6 is not finished until then): `gh secret set ANTHROPIC_API_KEY --repo sebasyero94/content-drift-agent` and paste the key when prompted, or Settings > Secrets and variables > Actions > New repository secret.
+- **all sessions:** do not `git checkout` or switch branches in the shared working directory. Others have uncommitted files there and checkout can fail or clobber. Use `git worktree add` in the scratchpad.
 
 ## Blocked
 - (none) The Anthropic key is in `.env` and verified (see the 2026-10-03 lead T4 entry). Still open: the GitHub secret, which `plumbing` T6 needs the user to set once the repo exists.
 
 ## Log
+2026-10-03 20:35 · plumbing · T6, T7, T8, T11, T18, T19, T20
+- T6: repo https://github.com/sebasyero94/content-drift-agent (public, user-approved name and visibility). The initial commit also carried the shared scaffold, `docs/` and `data`'s `agent/profound/` files that existed then. The secret `ANTHROPIC_API_KEY` is **not set yet** (I did not copy it from `.env`; the user sets it, see Requests).
+- T7: `mock-site/index.html` (banner says DEMO REPLICA) and `mock-site/SOURCES.md` (per-fact source). Checked against the live pricing page and docs on 2026-10-03.
+  **Disagreements on Mixpanel's own pages (recorded, not resolved):** (1) Pricing page card says Growth "Up to 500K session replays / month", its own comparison table says Growth "20k monthly sessions", and docs say Growth "20k free Replays per month" (plans bought or edited after April 2024). Replica uses 500K. (2) Enterprise retention: pricing table "7-365 days", docs "7 days and 360 days". Replica gives no range. (3) Free retention 30 days appears on the pricing table as well as docs (data-notes said docs only). Replica states Free replays 10K, flags 10, events 1M, experiments 1k MEU.
+- T8: branches `demo/pr-a-free-limits`, `demo/pr-b-copy-tweak`, `demo/pr-c-replay-retention` on origin, each one small commit (5 changed lines for A, 2 for B, 2 for C), patch files in `mock-site/demo-prs/`. Open PRs: #1 (A), #2 (B), #3 (C). A and C change every in-page mention, so the replica stays consistent. Cut from main after the workflows landed, so rebase them if main changes agent code the approval workflow needs.
+- T11: `agent/github/diff.py` `get_pr_diff(pr_url)` returns the PLAN `PRDiff`. Ran it on PR #1: correct title, base `main`, one file with the patch.
+- T19: `agent/report.py` `render_report`, `post_comment` (updates its own earlier comment, found by a hidden marker, so re-runs do not pile up comments). Also embeds a hidden compressed copy of the report in the comment so the approval step needs no artifacts. Banner shows STUBBED when the fetched stamp says stub. Test fixture: `agent/github/fixtures/sample_report.json` (labelled stub).
+- T18: `.github/workflows/content-drift.yml`, triggers on PRs touching `mock-site/**` (opened, synchronize, reopened). Verified: opening PRs #1, #2, #3 started runs by themselves, all green, comments posted. Those runs used stubs, as listed above.
+- T20: `.github/workflows/content-approved.yml` plus `agent/github/approve.py`. Verified on PR #1: before the label, no `content-updates/` on the branch; after adding `content-approved`, the workflow committed `content-updates/pr-1.md` to the PR branch. I then reset the branch and removed the label. The test file came from stub data, so it had empty page lists. Rendering with the fixture shows the owned, third-party and ambiguous sections.
+- Gotchas: the checklist commit by the Action triggers a second run of the scan workflow that GitHub holds as `action_required` (harmless, no token). The approval workflow checks out the PR branch, so a PR branch cut before `agent/github/approve.py` existed fails with ModuleNotFoundError (this happened once, fixed by rebasing).
+- Next: wait for the secret and real modules on main, then re-run PR #1 to see the real report.
+
+2026-10-03 · engine · T14, T15, T16, T17
+- Done: `agent/facts.py` (`extract_fact_deltas`, plus shared `call_json` helper used by triage and scan), `agent/triage.py` (`triage`), `agent/scan.py` (`scan`, edits, ranking). Run on real API, Python 3.9.
+- Verified: PR A -> 2 deltas (replays 10K->20K, flags 10->20), PR B -> 0 deltas, PR C -> 1 delta. Triage: A flag/high, B skip, C flag/medium; rationale quotes a prompt and its Mixpanel visibility (from `agent.profound.client`, fetched 2026-10-03). Planted corpus via `python -m agent.evals.run_planted`: stale precision 100%, recall 83% (15/18, varies +-1 per run), 5/5 ambiguous flagged, all 8 trap classes clean. Real cached pages (mixpanel.com/pricing, docs session-replay, seline): PR A 4 stale, 2 ambiguous, 6 current; PR C 1 stale (docs).
+- Known misses: paraphrase without the number ("keeps replays for a month") is not found; two "expected stale" planted passages come back ambiguous on purpose (07#1 page says both 10 and 25 flags; 08#2 "Their free plan..." never names Mixpanel). `evals`: consider whether those labels are right.
+- Gotchas: `claude-sonnet-5-5` rejects forced `tool_choice`, so `call_json` uses tool_choice auto plus an instruction and validates (retry once). Scan uses `page["passage_context"]` from data's corpus (heading per passage); without it the plan is often unnamed and results go ambiguous.
+- Contract additions (own shapes): `Finding.citation_share_imputed: bool`; `Triage.evidence.origin: str`; no-delta skip has `evidence.data_source: "none"`. `scan.LAST_STATS` holds pages_scanned, passages_checked, stale/ambiguous/current counts for the report (`lead`/`plumbing` can read it after `scan()`). `mixpanel_visibility` is assumed to be a 0-1 fraction (shown as %); values >1 are treated as percents.
+- Ranking: current findings are returned (priority 0) and counted. All three real pages tie at share 0.0009 because `build_corpus` gave extra_urls the minimum share, so ordering is stale-first, then ambiguous.
+- Next: wire into main (lead), rerun after plumbing's mock-site PRs land.
+
 2026-10-03 · data · T12, T13
 - Done, run on PR A facts (replays 10,000→20,000, flags 10→20): `get_related_prompts` returned 9 prompts, `get_cited_pages` 62 PageRefs (61 third party + mixpanel.com/pricing/ owned), `build_corpus` 58 pages OK + 6 failed (3 youtube and 2 reddit: no extractable text; kameleoon.com: HTTP 403). Offline replay (`offline=True` / `CORPUS_OFFLINE=1`) rebuilds the same 58 from disk.
 - Files: `agent/profound/{client.py,corpus.py,__init__.py}`, `fixtures/{prompts.json,citations.json,_build_fixtures.py}` (real MCP output, fetched 2026-10-03, window 2026-09-03..10-02), `fixtures/corpus_cache/` (3.4 MB, **commit it**: the Action replays it).

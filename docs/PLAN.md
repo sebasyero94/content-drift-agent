@@ -127,9 +127,9 @@ Owner tags are in brackets. Time-boxes assume roughly 4.5 hours total. Adjust if
   - Done when: facts and the prompts they map to are recorded in `CLAUDE.md` Decisions.
 - [ ] **T6** `[plumbing]` Create a GitHub repo for this project and push. Ask the user before creating anything (5 min)
   - Done when: remote exists, repo name recorded, and the user has set the `ANTHROPIC_API_KEY` secret.
-- [ ] **T7** `[plumbing]` Build `mock-site/index.html`: static pricing page replica with plan cards, a FAQ and a feature section, labeled as a demo replica. Verify every fact against the live pricing page first (15 min)
+- [x] **T7** `[plumbing]` Build `mock-site/index.html`: static pricing page replica with plan cards, a FAQ and a feature section, labeled as a demo replica. Verify every fact against the live pricing page first (15 min)
   - Done when: the page renders locally and a source note lists where each fact came from.
-- [ ] **T8** `[plumbing]` Prepare the three demo PRs as branches with patch files: A pricing, B copy tweak, C retention (10 min)
+- [x] **T8** `[plumbing]` Prepare the three demo PRs as branches with patch files: A pricing, B copy tweak, C retention (10 min)
   - Done when: three branches exist and the diffs are small and clear.
 - [ ] **T9** `[evals]` Design the planted corpus: about 10 local HTML pages (FAQ, blog, docs, comparison) with known stale, current and ambiguous passages for PR A and PR C, and a ground-truth JSON (10 min)
   - Done when: `agent/evals/planted/` holds pages and `ground_truth.json`.
@@ -137,27 +137,27 @@ Owner tags are in brackets. Time-boxes assume roughly 4.5 hours total. Adjust if
 ### Phase 2: Core (85 min)
 - [x] **T10** `[lead]` Scaffold: `requirements.txt`, `.env.example`, `agent/main.py` wired to the interfaces with stubs (10 min)
   - Done when: `python -m agent.main --pr <url>` runs end to end on stubs and lists STUBBED steps.
-- [ ] **T11** `[plumbing]` PR diff reader using the GitHub API (`gh` is available) (10 min)
+- [x] **T11** `[plumbing]` PR diff reader using the GitHub API (`gh` is available) (10 min)
   - Done when: `get_pr_diff` returns a correct `PRDiff` for demo PR A.
 - [x] **T12** `[data]` Profound client: `get_related_prompts` and `get_cited_pages`, with real MCP responses cached to `agent/profound/fixtures/` (20 min)
   - Done when: both return real cached data for the facts in PR A, stamped `cached` with a fetch date.
 - [x] **T13** `[data]` Corpus builder: fetch, clean and cache pages, split into passages that contain the searchable fact, and load local pages from a directory (20 min)
   - Done when: a corpus builds from real URLs (cached to disk) and from `agent/evals/planted/`.
-- [ ] **T14** `[engine]` Fact-delta extractor from a diff, including `search_terms` (15 min)
+- [x] **T14** `[engine]` Fact-delta extractor from a diff, including `search_terms` (15 min)
   - Done when: PR A yields two correct deltas, PR B yields none, PR C yields one.
-- [ ] **T15** `[engine]` Triage with Profound evidence, structured and validated (15 min)
+- [x] **T15** `[engine]` Triage with Profound evidence, structured and validated (15 min)
   - Done when: PR A is flag/high and cites a specific prompt visibility number, and PR B is skip.
-- [ ] **T16** `[engine]` Scan and classify: find passages stating the old fact, mark stale, current or ambiguous with a reason (20 min)
+- [x] **T16** `[engine]` Scan and classify: find passages stating the old fact, mark stale, current or ambiguous with a reason (20 min)
   - Done when: it runs on the planted corpus and on real cached pages, and flags the ambiguity cases instead of picking a side.
-- [ ] **T17** `[engine]` Proposed edits and priority ranking per the rules above (15 min)
+- [x] **T17** `[engine]` Proposed edits and priority ranking per the rules above (15 min)
   - Done when: stale findings carry a before/after, sorted by priority, and edits contain no claims outside the diff.
 
 ### Phase 3: Trigger and review (45 min)
-- [ ] **T18** `[plumbing]` GitHub Action on PRs touching `mock-site/**`: runs `python -m agent.main --pr <url>` with secrets (20 min)
+- [x] **T18** `[plumbing]` GitHub Action on PRs touching `mock-site/**`: runs `python -m agent.main --pr <url>` with secrets (20 min)
   - Done when: opening PR A starts the run with no terminal involved.
-- [ ] **T19** `[plumbing]` `agent/report.py`: render the report as a PR comment (triage verdict and evidence, deltas, ranked findings with before/after, stats, "from cache, fetched <date>" note) and post it (10 min)
+- [x] **T19** `[plumbing]` `agent/report.py`: render the report as a PR comment (triage verdict and evidence, deltas, ranked findings with before/after, stats, "from cache, fetched <date>" note) and post it (10 min)
   - Done when: the comment is readable on its own and lists owned pages separately from third-party pages.
-- [ ] **T20** `[plumbing]` Approval: the PMM adds the label `content-approved` and a second workflow commits `content-updates/pr-<n>.md` (15 min)
+- [x] **T20** `[plumbing]` Approval: the PMM adds the label `content-approved` and a second workflow commits `content-updates/pr-<n>.md` (15 min)
   - Done when: nothing is written before the label, and the file holds a checklist of owned edits and a list of third-party pages to contact.
 
 ### Phase 4: Evals (40 min)
