@@ -1,0 +1,544 @@
+{
+ "_meta": {
+  "data_source": "cached",
+  "fetched": "2026-10-03",
+  "window": "2026-09-03..2026-10-02",
+  "via": "Profound MCP (interactive OAuth)",
+  "category_id": "9bbb7725-af0b-48e7-b6aa-929af4b5c869",
+  "topic": "Session replay, experiments & feature flags",
+  "note": "Top 12 pages per prompt (limit=12), by citation_share averaged per AI model. total pages per prompt were 67-105."
+ },
+ "by_prompt": {
+  "8de94090-2f5b-41eb-b256-b652531ec36b": [
+   {
+    "page": "growthbook.io/insights/free-feature-flagging-tools",
+    "count": 18,
+    "citation_share": 0.0866,
+    "citation_category": "other"
+   },
+   {
+    "page": "configcat.com/blog/top-launchdarkly-alternatives/",
+    "count": 28,
+    "citation_share": 0.07895,
+    "citation_category": "other"
+   },
+   {
+    "page": "launchdarkly.com/blog/best-free-feature-flag-services/",
+    "count": 20,
+    "citation_share": 0.06042,
+    "citation_category": "other"
+   },
+   {
+    "page": "posthog.com/compare/best-open-source-feature-flag-tools",
+    "count": 19,
+    "citation_share": 0.05692,
+    "citation_category": "other"
+   },
+   {
+    "page": "abtesting.cc/blog/best-free-feature-flag-tools/",
+    "count": 5,
+    "citation_share": 0.04902,
+    "citation_category": "earned_media"
+   },
+   {
+    "page": "growthbook.io/insights/best-feature-flag-tools-for-developers",
+    "count": 11,
+    "citation_share": 0.03787,
+    "citation_category": "other"
+   },
+   {
+    "page": "flagshark.com/blog/open-source-feature-flag-tools-compared-2026/",
+    "count": 3,
+    "citation_share": 0.02941,
+    "citation_category": "other"
+   },
+   {
+    "page": "growthbook.io/blog/best-open-source-feature-flagging-tools-compared",
+    "count": 6,
+    "citation_share": 0.02761,
+    "citation_category": "other"
+   },
+   {
+    "page": "statsig.com/comparison/best-free-feature-flagging-tools",
+    "count": 11,
+    "citation_share": 0.02678,
+    "citation_category": "other"
+   },
+   {
+    "page": "toolradar.com/best/free/feature-flags",
+    "count": 3,
+    "citation_share": 0.02174,
+    "citation_category": "social"
+   },
+   {
+    "page": "kameleoon.com/blog/top-feature-flag-management-tools",
+    "count": 7,
+    "citation_share": 0.02102,
+    "citation_category": "other"
+   },
+   {
+    "page": "harness.io/blog/feature-flag-tools-compared-10-best-platforms-for-safer-releases",
+    "count": 5,
+    "citation_share": 0.01857,
+    "citation_category": "other"
+   }
+  ],
+  "02c54a4a-fe21-46e0-9669-89ba97ce1313": [
+   {
+    "page": "learn.g2.com/best-session-replay-software",
+    "count": 33,
+    "citation_share": 0.09462,
+    "citation_category": "social"
+   },
+   {
+    "page": "quantummetric.com/blog/best-session-replay-tools-in-2026",
+    "count": 22,
+    "citation_share": 0.08009,
+    "citation_category": "other"
+   },
+   {
+    "page": "userpilot.com/blog/session-replay-tools/",
+    "count": 16,
+    "citation_share": 0.06301,
+    "citation_category": "other"
+   },
+   {
+    "page": "zapier.com/blog/best-session-replay-tools/",
+    "count": 14,
+    "citation_share": 0.04617,
+    "citation_category": "other"
+   },
+   {
+    "page": "rollbar.com/blog/session-replay-tools/",
+    "count": 12,
+    "citation_share": 0.04452,
+    "citation_category": "other"
+   },
+   {
+    "page": "koji.so/blog/best-session-replay-tools-2026",
+    "count": 7,
+    "citation_share": 0.03865,
+    "citation_category": "other"
+   },
+   {
+    "page": "artisangrowthstrategies.com/blog/best-session-replay-tools-2026",
+    "count": 5,
+    "citation_share": 0.03493,
+    "citation_category": "other"
+   },
+   {
+    "page": "motadata.com/blog/best-session-replay-software",
+    "count": 9,
+    "citation_share": 0.03426,
+    "citation_category": "other"
+   },
+   {
+    "page": "youtube.com/watch?v=mWo0SUX2yGs",
+    "count": 6,
+    "citation_share": 0.02706,
+    "citation_category": "social"
+   },
+   {
+    "page": "fullstory.com/platform/session-replay/",
+    "count": 5,
+    "citation_share": 0.02185,
+    "citation_category": "other"
+   },
+   {
+    "page": "docs.logrocket.com/docs/session-replay",
+    "count": 4,
+    "citation_share": 0.01852,
+    "citation_category": "other"
+   },
+   {
+    "page": "logrocket.com/products/session-replay",
+    "count": 4,
+    "citation_share": 0.01852,
+    "citation_category": "other"
+   }
+  ],
+  "65414e9b-6faa-4ae2-aa18-a91908763b97": [
+   {
+    "page": "quantummetric.com/blog/best-session-replay-tools-in-2026",
+    "count": 17,
+    "citation_share": 0.08621,
+    "citation_category": "other"
+   },
+   {
+    "page": "userpilot.com/blog/session-replay-tools/",
+    "count": 5,
+    "citation_share": 0.03798,
+    "citation_category": "other"
+   },
+   {
+    "page": "artisangrowthstrategies.com/blog/best-session-replay-tools-2026",
+    "count": 3,
+    "citation_share": 0.03655,
+    "citation_category": "other"
+   },
+   {
+    "page": "openreplay.com/",
+    "count": 9,
+    "citation_share": 0.03551,
+    "citation_category": "other"
+   },
+   {
+    "page": "learn.g2.com/best-product-analytics-software",
+    "count": 8,
+    "citation_share": 0.03273,
+    "citation_category": "social"
+   },
+   {
+    "page": "motadata.com/blog/best-session-replay-software",
+    "count": 8,
+    "citation_share": 0.03252,
+    "citation_category": "other"
+   },
+   {
+    "page": "statsig.com/comparison/best-session-replay-tools",
+    "count": 5,
+    "citation_share": 0.02882,
+    "citation_category": "other"
+   },
+   {
+    "page": "newrelic.com/blog/observability/session-replay-tools",
+    "count": 7,
+    "citation_share": 0.02759,
+    "citation_category": "other"
+   },
+   {
+    "page": "youtube.com/watch?v=0PtM76cSX6k&vl=en",
+    "count": 7,
+    "citation_share": 0.02749,
+    "citation_category": "social"
+   },
+   {
+    "page": "amplitude.com/compare/best-fullstory-session-replay-alternatives",
+    "count": 3,
+    "citation_share": 0.02632,
+    "citation_category": "other"
+   },
+   {
+    "page": "amplitude.com/compare/best-product-analytics-tools",
+    "count": 3,
+    "citation_share": 0.02632,
+    "citation_category": "other"
+   },
+   {
+    "page": "pendo.io/pendo-blog/top-10-product-analytics-tools/",
+    "count": 6,
+    "citation_share": 0.02439,
+    "citation_category": "other"
+   }
+  ],
+  "6416931f-6672-482a-a12a-578a7e86cbe1": [
+   {
+    "page": "statsig.com/comparison/best-session-replay-tools",
+    "count": 21,
+    "citation_share": 0.07778,
+    "citation_category": "other"
+   },
+   {
+    "page": "dupple.com/learn/best-product-analytics-tools",
+    "count": 6,
+    "citation_share": 0.04545,
+    "citation_category": "earned_media"
+   },
+   {
+    "page": "artisangrowthstrategies.com/blog/best-session-replay-tools-2026",
+    "count": 5,
+    "citation_share": 0.04167,
+    "citation_category": "other"
+   },
+   {
+    "page": "swetrix.com/blog/best-analytics-tools-ab-testing-feature-flags",
+    "count": 13,
+    "citation_share": 0.04096,
+    "citation_category": "other"
+   },
+   {
+    "page": "learn.g2.com/best-session-replay-software",
+    "count": 11,
+    "citation_share": 0.04091,
+    "citation_category": "social"
+   },
+   {
+    "page": "growthbook.io/insights/best-ab-testing-tools-with-feature-flags",
+    "count": 9,
+    "citation_share": 0.02647,
+    "citation_category": "other"
+   },
+   {
+    "page": "flagsmith.com/blog/product-experimentation-tools",
+    "count": 8,
+    "citation_share": 0.02438,
+    "citation_category": "other"
+   },
+   {
+    "page": "quantummetric.com/blog/best-session-replay-tools-in-2026",
+    "count": 6,
+    "citation_share": 0.02247,
+    "citation_category": "other"
+   },
+   {
+    "page": "youtube.com/watch?v=0PtM76cSX6k&vl=en",
+    "count": 8,
+    "citation_share": 0.02184,
+    "citation_category": "social"
+   },
+   {
+    "page": "amplitude.com/compare/best-product-analytics-tools",
+    "count": 5,
+    "citation_share": 0.02098,
+    "citation_category": "other"
+   },
+   {
+    "page": "amplitude.com/compare/best-ecommerce-analytics-tools",
+    "count": 7,
+    "citation_share": 0.01745,
+    "citation_category": "other"
+   },
+   {
+    "page": "pendo.io/pendo-blog/the-top-6-session-replay-tools/",
+    "count": 7,
+    "citation_share": 0.01745,
+    "citation_category": "other"
+   }
+  ],
+  "c3be360c-999b-44b4-999b-cf597eafe1b9": [
+   {
+    "page": "configcat.com/blog/top-launchdarkly-alternatives/",
+    "count": 33,
+    "citation_share": 0.08938,
+    "citation_category": "other"
+   },
+   {
+    "page": "harness.io/blog/feature-flag-tools-compared-10-best-platforms-for-safer-releases",
+    "count": 38,
+    "citation_share": 0.08587,
+    "citation_category": "other"
+   },
+   {
+    "page": "dif.sh/blog/best-feature-flag-tools-2026/",
+    "count": 9,
+    "citation_share": 0.07545,
+    "citation_category": "other"
+   },
+   {
+    "page": "octopus.com/devops/feature-flags/feature-flag-tools/",
+    "count": 10,
+    "citation_share": 0.05001,
+    "citation_category": "other"
+   },
+   {
+    "page": "abtesting.cc/blog/best-feature-flag-tools/",
+    "count": 4,
+    "citation_share": 0.03922,
+    "citation_category": "earned_media"
+   },
+   {
+    "page": "ciopages.com/buyer-guides/feature-flag-management",
+    "count": 5,
+    "citation_share": 0.03623,
+    "citation_category": "other"
+   },
+   {
+    "page": "reddit.com/r/devops/comments/t9kdyg/what_feature_toggleflag_service_are_you_using/",
+    "count": 6,
+    "citation_share": 0.03365,
+    "citation_category": "social"
+   },
+   {
+    "page": "launchdarkly.com/blog/best-free-feature-flag-services/",
+    "count": 5,
+    "citation_share": 0.03045,
+    "citation_category": "other"
+   },
+   {
+    "page": "schematichq.com/blog/feature-flag-management-tools",
+    "count": 7,
+    "citation_share": 0.03003,
+    "citation_category": "other"
+   },
+   {
+    "page": "guideflow.com/blog/feature-flag-software",
+    "count": 3,
+    "citation_share": 0.02941,
+    "citation_category": "other"
+   },
+   {
+    "page": "stackfyi.com/guides/feature-flag-tools-launchdarkly-statsig-growthbook-unleash-2026",
+    "count": 4,
+    "citation_share": 0.02899,
+    "citation_category": "other"
+   },
+   {
+    "page": "kameleoon.com/blog/top-feature-flag-management-tools",
+    "count": 12,
+    "citation_share": 0.02823,
+    "citation_category": "other"
+   }
+  ],
+  "fe875764-1a6b-4b5f-af54-e6e3d3531c89": [
+   {
+    "page": "userpilot.com/blog/session-replay-tools/",
+    "count": 21,
+    "citation_share": 0.1134,
+    "citation_category": "other"
+   },
+   {
+    "page": "quantummetric.com/blog/best-session-replay-tools-in-2026",
+    "count": 14,
+    "citation_share": 0.07871,
+    "citation_category": "other"
+   },
+   {
+    "page": "learn.g2.com/best-session-replay-software",
+    "count": 20,
+    "citation_share": 0.07459,
+    "citation_category": "social"
+   },
+   {
+    "page": "artisangrowthstrategies.com/blog/best-session-replay-tools-2026",
+    "count": 7,
+    "citation_share": 0.06795,
+    "citation_category": "other"
+   },
+   {
+    "page": "posthog.com/compare/best-mobile-app-session-replay-tools",
+    "count": 9,
+    "citation_share": 0.04245,
+    "citation_category": "other"
+   },
+   {
+    "page": "zapier.com/blog/best-session-replay-tools/",
+    "count": 9,
+    "citation_share": 0.03709,
+    "citation_category": "other"
+   },
+   {
+    "page": "uxcam.com/blog/session-replay-tools-for-mobile-apps/",
+    "count": 8,
+    "citation_share": 0.03631,
+    "citation_category": "other"
+   },
+   {
+    "page": "rollbar.com/blog/session-replay-tools/",
+    "count": 7,
+    "citation_share": 0.03171,
+    "citation_category": "other"
+   },
+   {
+    "page": "motadata.com/blog/best-session-replay-software",
+    "count": 6,
+    "citation_share": 0.02648,
+    "citation_category": "other"
+   },
+   {
+    "page": "posthog.com/compare/best-session-replay-tools",
+    "count": 6,
+    "citation_share": 0.02638,
+    "citation_category": "other"
+   },
+   {
+    "page": "youtube.com/watch?v=acJ5ZUlysQA",
+    "count": 5,
+    "citation_share": 0.0241,
+    "citation_category": "social"
+   },
+   {
+    "page": "fullstory.com/blog/mobile-analytics/",
+    "count": 5,
+    "citation_share": 0.02381,
+    "citation_category": "other"
+   }
+  ],
+  "8012aa9c-e7a6-4e7e-bbfa-d13ea39e9a97": [
+   {
+    "page": "amplitude.com/compare/best-feature-flag-tools",
+    "count": 14,
+    "citation_share": 0.11427,
+    "citation_category": "other"
+   },
+   {
+    "page": "amplitude.com/compare/top-feature-flag-solutions-for-product-teams",
+    "count": 8,
+    "citation_share": 0.07868,
+    "citation_category": "other"
+   },
+   {
+    "page": "mixpanel.com/blog/feature-flagging/",
+    "count": 6,
+    "citation_share": 0.04971,
+    "citation_category": "owned"
+   },
+   {
+    "page": "featureflags.io/build-or-buy/",
+    "count": 6,
+    "citation_share": 0.04971,
+    "citation_category": "other"
+   },
+   {
+    "page": "launchdarkly.com/blog/what-are-feature-flags/",
+    "count": 5,
+    "citation_share": 0.0433,
+    "citation_category": "other"
+   },
+   {
+    "page": "ciopages.com/buyer-guides/feature-flag-management",
+    "count": 4,
+    "citation_share": 0.03897,
+    "citation_category": "other"
+   },
+   {
+    "page": "futurepicker.com/en/launchdarkly-vs-posthog-vs-flagsmith-vs-devcycle-feature-flags-2026/",
+    "count": 3,
+    "citation_share": 0.03846,
+    "citation_category": "earned_media"
+   },
+   {
+    "page": "statsig.com/glossary/feature-flagging-tools",
+    "count": 3,
+    "citation_share": 0.03663,
+    "citation_category": "other"
+   },
+   {
+    "page": "posthog.com/blog/best-feature-flag-software-for-developers",
+    "count": 5,
+    "citation_share": 0.03608,
+    "citation_category": "other"
+   },
+   {
+    "page": "developers.dev/tech-talk/the-engineering-decision-build-vs-buy-vs-open-source-for-enterprise-feature-flag-management.html",
+    "count": 2,
+    "citation_share": 0.02564,
+    "citation_category": "other"
+   },
+   {
+    "page": "schematichq.com/blog/feature-flag-management-tools",
+    "count": 1,
+    "citation_share": 0.02381,
+    "citation_category": "other"
+   },
+   {
+    "page": "reddit.com/r/SoftwareEngineering/comments/17o7rsj/to_feature_flag_or_to_not_feature_flag/",
+    "count": 1,
+    "citation_share": 0.02381,
+    "citation_category": "social"
+   }
+  ]
+ },
+ "owned_page_lookup": [
+  {
+   "page": "mixpanel.com/pricing/",
+   "count": 30,
+   "citation_share": 0.0009,
+   "citation_category": "owned",
+   "scope": "topic-wide, not per prompt"
+  }
+ ],
+ "page_lookup_no_rows": [
+  "docs.mixpanel.com/docs/session-replay",
+  "seline.com/blog/mixpanel-pricing"
+ ]
+}

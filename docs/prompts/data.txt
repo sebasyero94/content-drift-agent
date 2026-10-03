@@ -1,0 +1,17 @@
+You are the `data` session on the Content Drift Agent project, a one-day build for the Profound Marketing Engineering Hackathon with a hard Typeform deadline of 6:00 PM today.
+
+First read, in order: CLAUDE.md, docs/PLAN.md, docs/handoff.md, docs/data-notes.md. Then follow the working agreement in docs/PLAN.md. Other sessions run in parallel and share only those files, so log what you do in docs/handoff.md.
+
+You own: agent/profound/. Do not edit other paths. Put cross-session asks in docs/handoff.md under "Requests".
+
+Your tasks: T12 and T13.
+
+You turn Profound data and the public web into the corpus the engine scans.
+
+The lead session is doing Phase 0 and will fill docs/data-notes.md with the pricing-related prompts and cited pages. Start now against fixtures in the exact PLAN.md shapes (PageRef, Page), then swap in real data when the notes land. Check docs/data-notes.md and docs/handoff.md before each task. If the notes are not ready, you may call the Profound MCP yourself: the Mixpanel category id, topic ids and quirks are in docs/data-notes.md. Keep responses small (filter by topic and asset, limit at or below 50).
+
+T12: agent/profound/client.py. get_related_prompts(deltas) returns the tracked prompts related to the changed facts, each with id, text, topic and Mixpanel's visibility. get_cited_pages(prompt_ids) returns PageRef objects with url, domain, owner (owned means mixpanel.com), citation_share and prompt_ids, from the page-level citations report. Save real MCP responses to agent/profound/fixtures/ and serve from there in automation, because the MCP uses interactive OAuth that a GitHub Action cannot use. Every result must be stamped with data_source "cached" and the fetch date, and nothing may present cached data as live.
+
+T13: agent/profound/corpus.py. build_corpus(refs, extra_urls, local_dir) fetches each page, cleans it to text, splits it into passages, and caches the result to disk so the demo can replay offline (some sites block; record failures instead of hiding them). It also loads local HTML or markdown pages from a directory, so the evals session can scan its planted corpus through the same code path. Passages should be small enough that one passage states one fact, and each Page keeps its citation_share and prompt_ids. Keep dependencies light and Python 3.9-compatible.
+
+Verify by running both functions for the facts in demo PR A and showing me real output, including pages that failed to fetch.

@@ -1,0 +1,17 @@
+You are the `engine` session on the Content Drift Agent project, a one-day build for the Profound Marketing Engineering Hackathon with a hard Typeform deadline of 6:00 PM today.
+
+First read, in order: CLAUDE.md, docs/PLAN.md, docs/handoff.md, docs/data-notes.md. Then follow the working agreement in docs/PLAN.md. Other sessions run in parallel and share only those files, so log what you do in docs/handoff.md.
+
+You own: agent/facts.py, agent/triage.py, and agent/scan.py. Do not edit other paths. Put cross-session asks in docs/handoff.md under "Requests".
+
+Your tasks: T14, T15, T16, T17.
+
+You build the reasoning core: fact extraction, triage, and finding stale content.
+
+Start now against fixtures in the exact PLAN.md shapes (PRDiff, FactDelta, Triage, Page, Finding). Check docs/handoff.md before each task for the real corpus and Profound client. Use the Anthropic SDK with claude-sonnet-5-5 for extraction, triage, classification and edits, and claude-haiku-4-5-20251001 for cheap bulk filtering of passages. Use structured JSON output and validate it. If ANTHROPIC_API_KEY is not set yet, say so in docs/handoff.md and write the code and tests against fixtures. Keep the code Python 3.9-compatible.
+
+T14: agent/facts.py, extract_fact_deltas(diff) -> list[FactDelta]. Read the PR diff and return one delta per changed product fact: entity, attribute, old value, new value, unit, source file and line, and search_terms (the phrases a page would use to state the OLD value, for example "10,000 session replays", "10k replays", "10K free replays"). A change that alters no fact (CSS, typos, layout) returns an empty list. T15: agent/triage.py, triage(diff, deltas) -> Triage. Call get_related_prompts from agent/profound/client.py, and make the rationale cite a specific prompt and its Mixpanel visibility number. No deltas means verdict skip.
+
+T16: agent/scan.py, scan(deltas, corpus) -> list[Finding]. For each passage that states the old value of a delta, classify it as stale (states the old fact as true now), current (already states the new value, or is about a different plan or context), or ambiguous (the page is itself inconsistent, or it is unclear which context applies). Never resolve an ambiguity silently: say why it is ambiguous. The same number in a different context, for example Growth rather than Free, is not stale. T17: for stale findings write a minimal before and after edit that uses only the new value and wording already in the passage and adds no claim that is not in the diff. Compute priority per PLAN.md (citation_share times a weight of 1.0 for stale and 0.5 for ambiguous) and sort descending. Owned pages with no citation data get the minimum citation share seen, not zero.
+
+Verify on the demo PR A diff and a real corpus and show me the output, including cases where the classification is uncertain. Report misses honestly.

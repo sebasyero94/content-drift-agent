@@ -1,0 +1,198 @@
+<title>Content Drift Agent</title>
+<link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:wght@400;500&family=IBM+Plex+Sans:wght@400;500;600&display=swap">
+<style>
+/* Layout: summary and progress first, then reference sections (build, scoring, data contract), then the phased checklist, then demo, cut line, risks and decisions. */
+:root{--bg:#f6f7f8;--fg:#14191f;--muted:#59636e;--line:#c9d0d6;--surface:#ffffff;--lane:#eef1f3;--accent:#0b6e66;--accent-soft:#d9efec;--human:#8a4b08;--human-soft:#faead6;--code:#e9edf0;--font:'IBM Plex Sans',system-ui,sans-serif;--mono:'IBM Plex Mono',ui-monospace,monospace}
+@media (prefers-color-scheme:dark){:root:not([data-theme="light"]){--bg:#0f1418;--fg:#e6eaee;--muted:#98a3ad;--line:#2f3a43;--surface:#171e24;--lane:#141a1f;--accent:#4fd1c5;--accent-soft:#12302d;--human:#f0b66b;--human-soft:#332411;--code:#1d262d;color-scheme:dark}}
+:root[data-theme="dark"]{--bg:#0f1418;--fg:#e6eaee;--muted:#98a3ad;--line:#2f3a43;--surface:#171e24;--lane:#141a1f;--accent:#4fd1c5;--accent-soft:#12302d;--human:#f0b66b;--human-soft:#332411;--code:#1d262d;color-scheme:dark}
+body{background:var(--bg);color:var(--fg);font-family:var(--font);font-size:15px;line-height:1.55;padding-inline:16px}
+main{max-width:980px;margin:0 auto;padding-block:32px 64px;display:flex;flex-direction:column;gap:40px}
+h1{font-size:28px;line-height:1.15;margin:0 0 8px;font-weight:600;text-wrap:balance}
+h2{font-size:19px;margin:0;font-weight:600;text-wrap:balance}
+h3{font-size:15px;margin:0;font-weight:600}
+p{margin:0}.lead{color:var(--muted);max-width:70ch}
+code{font-family:var(--mono);font-size:.88em;background:var(--code);padding:1px 5px;border-radius:3px}
+pre{margin:0;font-family:var(--mono);font-size:12.5px;line-height:1.5;background:var(--code);padding:14px 16px;border-radius:6px;overflow-x:auto}
+.tag{font-family:var(--mono);font-size:12px;letter-spacing:.06em;text-transform:uppercase;color:var(--accent)}
+section{display:flex;flex-direction:column;gap:12px;min-width:0}
+.top{display:flex;flex-direction:column;gap:14px}
+.prog{display:flex;flex-direction:column;gap:6px;max-width:520px}
+.bar{height:8px;background:var(--lane);border:1px solid var(--line);border-radius:4px;overflow:hidden}
+.bar i{display:block;height:100%;width:0;background:var(--accent);transition:width .2s}
+.prog span{font-family:var(--mono);font-size:12px;color:var(--muted)}
+.nav{display:flex;flex-wrap:wrap;gap:8px}
+.nav a{font-size:13px;color:var(--fg);text-decoration:none;border:1px solid var(--line);border-radius:4px;padding:4px 10px;background:var(--surface)}
+.nav a:hover,.nav a:focus-visible{border-color:var(--accent);outline:none}
+.tw{overflow-x:auto;border:1px solid var(--line);border-radius:6px;background:var(--surface)}
+table{border-collapse:collapse;width:100%;min-width:620px;font-size:14px}
+th,td{text-align:left;vertical-align:top;padding:10px 12px;border-bottom:1px solid var(--line)}
+tr:last-child td{border-bottom:0}
+th{font-family:var(--mono);font-size:12px;font-weight:500;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);background:var(--lane)}
+td:first-child{font-weight:600}
+.flow{display:flex;flex-wrap:wrap;gap:8px;align-items:center;font-size:13.5px}
+.flow span{border:1px solid var(--line);background:var(--surface);border-radius:4px;padding:5px 10px}
+.flow span.p{border-color:var(--accent)}.flow span.h{border-color:var(--human);background:var(--human-soft)}
+.flow b{color:var(--muted);font-weight:400}
+.phase{border-top:2px solid var(--line);padding-top:16px}
+.ph{display:flex;align-items:baseline;justify-content:space-between;gap:12px;flex-wrap:wrap}
+.tb{font-family:var(--mono);font-size:12px;color:var(--accent)}
+.intro{color:var(--muted);max-width:70ch}
+.tasks{list-style:none;margin:0;padding:0;display:flex;flex-direction:column;gap:8px}
+.task{border:1px solid var(--line);border-radius:6px;background:var(--surface);padding:10px 12px;display:flex;flex-direction:column;gap:6px;min-width:0}
+.task label{display:grid;grid-template-columns:22px 1fr;gap:8px;cursor:pointer;min-width:0}
+.task input{width:16px;height:16px;margin:3px 0 0;accent-color:var(--accent)}
+.tt{font-weight:500;min-width:0}
+.task input:checked + .tt{text-decoration:line-through;color:var(--muted)}
+.meta{display:flex;flex-wrap:wrap;gap:4px 14px;padding-left:30px;font-size:13px;color:var(--muted)}
+.min{font-family:var(--mono);font-size:12px;color:var(--accent)}
+.done b{font-weight:600;color:var(--fg);margin-right:4px}
+.note{font-size:13px;color:var(--muted);max-width:75ch;padding:8px 12px;border-left:3px solid var(--accent);background:var(--accent-soft)}
+ul.plain,ol.plain{margin:0;padding-left:20px;display:flex;flex-direction:column;gap:6px}
+.two{display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:16px}
+.card{border:1px solid var(--line);background:var(--surface);border-radius:6px;padding:14px 16px;display:flex;flex-direction:column;gap:8px;min-width:0}
+.small{font-size:13px;color:var(--muted)}
+
+.dg{display:block;min-width:820px;width:100%;height:auto;color:var(--fg)}
+.lane{fill:var(--surface)}.lane.alt{fill:var(--lane)}.lane.prof{fill:var(--accent-soft);opacity:.55}
+.ln{font:500 12px var(--mono);fill:var(--muted)}
+.bx{fill:var(--surface);stroke:var(--line);stroke-width:1.2}.bx.p{stroke:var(--accent);stroke-width:1.6}.bx.h{fill:var(--human-soft);stroke:var(--human);stroke-width:1.6}
+.bt{font:400 11px var(--font);fill:var(--fg)}
+.ar{stroke:var(--fg);stroke-width:1.3}.al{font:400 10.5px var(--mono);fill:var(--muted)}
+.scroll{overflow-x:auto;border:1px solid var(--line);border-radius:6px;background:var(--surface)}
+figcaption,.cap{color:var(--muted);font-size:14px;max-width:80ch}
+.key{display:flex;gap:16px;flex-wrap:wrap;font-size:13px;color:var(--muted)}
+.key span{display:inline-flex;align-items:center;gap:6px}.sw{width:12px;height:12px;border-radius:2px;border:1.6px solid var(--line);display:inline-block}
+.sw.p{border-color:var(--accent)}.sw.h{border-color:var(--human);background:var(--human-soft)}
+.badge{font-family:var(--mono);font-size:11px;padding:1px 7px;border-radius:3px;border:1px solid var(--line);white-space:nowrap}
+.badge.stale{border-color:var(--human);background:var(--human-soft);color:var(--human)}
+.badge.amb{border-color:var(--muted);color:var(--muted)}
+.badge.ok{border-color:var(--accent);background:var(--accent-soft);color:var(--accent)}
+.own{font-family:var(--mono);font-size:11px;color:var(--accent);margin-right:6px}
+.own.l{color:var(--muted)}
+.ba{display:grid;grid-template-columns:1fr 1fr;gap:12px}
+@media(max-width:640px){.ba{grid-template-columns:1fr}}
+.ba div{border:1px solid var(--line);border-radius:6px;padding:10px 12px;background:var(--surface);font-size:14px}
+.ba b{display:block;font-family:var(--mono);font-size:11px;letter-spacing:.05em;text-transform:uppercase;color:var(--muted);margin-bottom:4px}
+.ba .new{border-color:var(--accent);background:var(--accent-soft)}
+</style>
+<main>
+<header class="top">
+<div class="tag">Marketing Engineering Hackathon · Architecture</div>
+<h1>Content Drift Agent</h1>
+<p class="lead">When a product fact changes, the agent finds every page that still states the old one, proposes the edit, and ranks the pages by how much AI engines cite them. A PMM reviews and approves.</p>
+</header>
+
+<section class="fig">
+<div class="scroll"><svg viewBox="0 0 1088 456" role="img" aria-label="Pipeline: a PR changing the mock pricing page fires a GitHub Action. The agent extracts fact deltas, triages with Profound prompt and visibility data, fetches pages Profound reports as cited, classifies passages as stale, current or ambiguous with proposed edits, ranks by citation share, and posts a report that a PMM approves with a label." class="dg"><defs><marker id="ah" viewBox="0 0 10 10" refX="9" refY="5" markerWidth="7" markerHeight="7" orient="auto-start-reverse"><path d="M0 1 L9 5 L0 9 z" fill="currentColor"/></marker></defs>
+<rect class="lane" x="0" y="24" width="1088" height="84"/>
+<text class="ln" x="12" y="70">GitHub</text>
+<rect class="lane alt" x="0" y="108" width="1088" height="84"/>
+<text class="ln" x="12" y="154">Our agent</text>
+<rect class="lane prof" x="0" y="192" width="1088" height="84"/>
+<text class="ln" x="12" y="231">Profound</text>
+<text class="ln" x="12" y="245">(cached MCP)</text>
+<rect class="lane alt" x="0" y="276" width="1088" height="84"/>
+<text class="ln" x="12" y="322">Web pages</text>
+<rect class="lane" x="0" y="360" width="1088" height="84"/>
+<text class="ln" x="12" y="406">PMM</text>
+<rect class="bx n" x="110" y="40" width="116" height="52" rx="4"/>
+<text class="bt" x="168" y="56" text-anchor="middle">PR changes the</text>
+<text class="bt" x="168" y="70" text-anchor="middle">mock pricing</text>
+<text class="bt" x="168" y="84" text-anchor="middle">page</text>
+<rect class="bx n" x="902" y="40" width="116" height="52" rx="4"/>
+<text class="bt" x="960" y="63" text-anchor="middle">PR comment:</text>
+<text class="bt" x="960" y="77" text-anchor="middle">ranked report</text>
+<rect class="bx n" x="242" y="124" width="116" height="52" rx="4"/>
+<text class="bt" x="300" y="140" text-anchor="middle">Extract fact</text>
+<text class="bt" x="300" y="154" text-anchor="middle">deltas: entity,</text>
+<text class="bt" x="300" y="168" text-anchor="middle">old to new</text>
+<rect class="bx n" x="374" y="124" width="116" height="52" rx="4"/>
+<text class="bt" x="432" y="140" text-anchor="middle">Triage: flag</text>
+<text class="bt" x="432" y="154" text-anchor="middle">or skip, with</text>
+<text class="bt" x="432" y="168" text-anchor="middle">evidence</text>
+<rect class="bx n" x="770" y="124" width="116" height="52" rx="4"/>
+<text class="bt" x="828" y="140" text-anchor="middle">Classify: stale,</text>
+<text class="bt" x="828" y="154" text-anchor="middle">current, ambiguous;</text>
+<text class="bt" x="828" y="168" text-anchor="middle">propose edits</text>
+<rect class="bx n" x="902" y="124" width="116" height="52" rx="4"/>
+<text class="bt" x="960" y="147" text-anchor="middle">Rank by AI</text>
+<text class="bt" x="960" y="161" text-anchor="middle">citation share</text>
+<rect class="bx p" x="374" y="208" width="116" height="52" rx="4"/>
+<text class="bt" x="432" y="224" text-anchor="middle">Related prompts</text>
+<text class="bt" x="432" y="238" text-anchor="middle">and Mixpanel</text>
+<text class="bt" x="432" y="252" text-anchor="middle">visibility</text>
+<rect class="bx p" x="506" y="208" width="116" height="52" rx="4"/>
+<text class="bt" x="564" y="224" text-anchor="middle">Pages cited for</text>
+<text class="bt" x="564" y="238" text-anchor="middle">those prompts</text>
+<text class="bt" x="564" y="252" text-anchor="middle">(citation share)</text>
+<rect class="bx n" x="638" y="292" width="116" height="52" rx="4"/>
+<text class="bt" x="696" y="308" text-anchor="middle">Fetch and cache,</text>
+<text class="bt" x="696" y="322" text-anchor="middle">split into</text>
+<text class="bt" x="696" y="336" text-anchor="middle">passages</text>
+<rect class="bx h" x="902" y="376" width="116" height="52" rx="4"/>
+<text class="bt" x="960" y="392" text-anchor="middle">PMM reviews;</text>
+<text class="bt" x="960" y="406" text-anchor="middle">label approves,</text>
+<text class="bt" x="960" y="420" text-anchor="middle">checklist committed</text>
+<path class="ar" d="M168 92 L168 150 L242 150" fill="none" marker-end="url(#ah)"/>
+<text class="al" x="174" y="125" text-anchor="start">Action fires</text>
+<path class="ar" d="M358 150 L374 150" fill="none" marker-end="url(#ah)"/>
+<path class="ar" d="M432 176 L432 208" fill="none" marker-start="url(#ah)" marker-end="url(#ah)"/>
+<text class="al" x="438" y="196" text-anchor="start">related prompts</text>
+<path class="ar" d="M490 150 L564 150 L564 208" fill="none" marker-end="url(#ah)"/>
+<text class="al" x="570" y="196" text-anchor="start">if flagged</text>
+<path class="ar" d="M622 234 L696 234 L696 292" fill="none" marker-end="url(#ah)"/>
+<text class="al" x="702" y="272" text-anchor="start">URLs</text>
+<path class="ar" d="M754 318 L828 318 L828 176" fill="none" marker-end="url(#ah)"/>
+<text class="al" x="834" y="280" text-anchor="start">page text</text>
+<path class="ar" d="M886 150 L902 150" fill="none" marker-end="url(#ah)"/>
+<path class="ar" d="M960 124 L960 92" fill="none" marker-end="url(#ah)"/>
+<text class="al" x="966" y="112" text-anchor="start">post</text>
+<path class="ar" d="M1018 66 L1034 66 L1034 402 L1018 402" fill="none" marker-end="url(#ah)"/>
+</svg></div>
+<figcaption>A PR to a mock Mixpanel pricing page stands in for a full release. Profound supplies the prompts, visibility and cited pages. Everything else runs in our own agent.</figcaption>
+<div class="key"><span><i class="sw"></i>Our code, GitHub or the web</span><span><i class="sw p"></i>Profound data (replayed from cache)</span><span><i class="sw h"></i>Human review</span></div>
+</section>
+
+<section class="fig">
+<h2>What the PMM sees</h2>
+<p class="cap">Format of one finding in the PR comment. The page and quote are from Mixpanel's public docs. The edit is illustrative.</p>
+<div class="tw"><table>
+<thead><tr><th>Rank</th><th>Page</th><th>Verdict</th><th>Why it ranks here</th></tr></thead>
+<tbody>
+<tr><td>1</td><td><span class="own">owned</span>docs.mixpanel.com/docs/session-replay</td><td><span class="badge stale">stale</span></td><td>States the old Free plan quota as current. AI citation share from Profound.</td></tr>
+<tr><td>2</td><td><span class="own l">third party</span>pricing roundup article</td><td><span class="badge stale">stale</span></td><td>Cited by AI engines for plan-limit prompts. Not ours to edit, so it goes on the outreach list.</td></tr>
+<tr><td>3</td><td><span class="own">owned</span>pricing FAQ</td><td><span class="badge amb">ambiguous</span></td><td>Page quotes two different numbers for the same plan. The agent flags it and does not pick one.</td></tr>
+</tbody></table></div>
+<div class="ba"><div><b>Before</b>Free: 10k free Replays per month</div><div class="new"><b>After (proposed)</b>Free: 20k free Replays per month</div></div>
+</section>
+
+<section class="fig">
+<h2>Why this is a real problem</h2>
+<p>Mixpanel's own pages already disagree about session replay limits. The pricing page says Growth gets up to 500K replays a month, the docs say 20k free, and Enterprise retention is 7-365 days on one page and 7 to 360 days on another. They may describe different things, such as included versus purchasable. That ambiguity is what the agent should flag. At 40+ product teams per handful of PMMs, nobody can check this by hand after every change.</p>
+</section>
+
+<section class="fig">
+<h2>How it differs from a release-notes tool</h2>
+<div class="tw"><table>
+<thead><tr><th>&nbsp;</th><th>Release notes generator</th><th>Content Drift Agent</th></tr></thead>
+<tbody>
+<tr><td>Question</td><td>What should we say about this change?</td><td>What have we already said that is now wrong?</td></tr>
+<tr><td>Output</td><td>New assets</td><td>Ranked list of stale content with edits</td></tr>
+<tr><td>Where Profound data matters</td><td>Optional context</td><td>Core: it says which pages AI engines cite, so it orders the work</td></tr>
+<tr><td>Quality check</td><td>Reads well</td><td>Precision and recall on a planted corpus, plus edits that add no new claims</td></tr>
+</tbody></table></div>
+</section>
+
+<section class="fig">
+<h2>Questions for the Profound team</h2>
+<ol class="q">
+<li><p>Can page-level citations for a prompt be pulled programmatically, and how often are they refreshed?</p></li>
+<li><p>Does Profound keep the text of the pages it sees cited? If it does, we could scan that copy instead of fetching pages ourselves.</p></li>
+<li><p>Is an API key available so the agent can reach Profound without an interactive sign-in? Today we replay cached data in automation.</p></li>
+<li><p>FactCheck claims return no data for this category. If they were enabled, a stale page could be tied to an inaccurate AI answer.</p></li>
+<li><p>Did the PMM mean only a brand's own content, or also third-party pages that AI engines cite about it?</p></li>
+<li><p>What does "Profound-native" mean for judging?</p></li>
+</ol>
+<p class="note">Based on Profound's public docs and the hackathon account as of today. The diagram shows the plan and has not been tested end to end.</p>
+</section>
+</main>

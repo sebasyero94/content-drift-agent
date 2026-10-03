@@ -1,0 +1,187 @@
+{
+ "_meta": {
+  "data_source": "cached",
+  "fetched": "2026-10-03",
+  "window": "2026-09-03..2026-10-02",
+  "via": "Profound MCP (interactive OAuth)",
+  "category_id": "9bbb7725-af0b-48e7-b6aa-929af4b5c869",
+  "topic": "Session replay, experiments & feature flags"
+ },
+ "prompts": [
+  {
+   "id": "a09d8bc0-461a-42b4-8a30-20ae04baff72",
+   "text": "What are the best heatmap tools for web apps?",
+   "topic": "Session replay, experiments & feature flags",
+   "mixpanel_visibility": 0.03333,
+   "mixpanel_avg_position": 4
+  },
+  {
+   "id": "2300ab3a-f5e1-4c11-9df7-6d3b75f8d1c2",
+   "text": "What are the best experimentation platforms for a SaaS company?",
+   "topic": "Session replay, experiments & feature flags",
+   "mixpanel_visibility": 0.23333,
+   "mixpanel_avg_position": 5.5625
+  },
+  {
+   "id": "0ccafb05-5092-4b0d-8132-1903f0113210",
+   "text": "Are session replay tools legal and privacy compliant?",
+   "topic": "Session replay, experiments & feature flags",
+   "mixpanel_visibility": 0,
+   "mixpanel_avg_position": null
+  },
+  {
+   "id": "bc01e3e7-65fb-4ac7-b3d9-fb4c01d7d4c0",
+   "text": "Standalone A/B testing tool vs experiments built into a product analytics platform: which should a 50-person startup choose?",
+   "topic": "Session replay, experiments & feature flags",
+   "mixpanel_visibility": 0.6,
+   "mixpanel_avg_position": 3.91
+  },
+  {
+   "id": "6416931f-6672-482a-a12a-578a7e86cbe1",
+   "text": "What are the best all-in-one tools for analytics, replay, experiments, and flags?",
+   "topic": "Session replay, experiments & feature flags",
+   "mixpanel_visibility": 0.53333,
+   "mixpanel_avg_position": 3.02222
+  },
+  {
+   "id": "02c54a4a-fe21-46e0-9669-89ba97ce1313",
+   "text": "What are the best session replay tools?",
+   "topic": "Session replay, experiments & feature flags",
+   "mixpanel_visibility": 0,
+   "mixpanel_avg_position": null
+  },
+  {
+   "id": "8de94090-2f5b-41eb-b256-b652531ec36b",
+   "text": "What are the best free feature flag and experimentation tools for startups?",
+   "topic": "Session replay, experiments & feature flags",
+   "mixpanel_visibility": 0.03333,
+   "mixpanel_avg_position": 2
+  },
+  {
+   "id": "f1795741-d73c-4ec9-9087-9e7a3c1b8b41",
+   "text": "How long should an A/B test run?",
+   "topic": "Session replay, experiments & feature flags",
+   "mixpanel_visibility": 0,
+   "mixpanel_avg_position": null
+  },
+  {
+   "id": "403ff7ce-c7a7-4fb2-bdeb-61a8ad1c0099",
+   "text": "How do I run an A/B test on a product feature?",
+   "topic": "Session replay, experiments & feature flags",
+   "mixpanel_visibility": 0.3,
+   "mixpanel_avg_position": 9.25
+  },
+  {
+   "id": "7bef9804-776b-422e-8789-92e2241ab9c5",
+   "text": "What are the best tools for analyzing session recordings with AI instead of watching them manually?",
+   "topic": "Session replay, experiments & feature flags",
+   "mixpanel_visibility": 0.03333,
+   "mixpanel_avg_position": 4
+  },
+  {
+   "id": "2973c2ef-9cf7-48c5-b1ae-b2071fb9840c",
+   "text": "What are the best tools for debugging UX issues with session replay?",
+   "topic": "Session replay, experiments & feature flags",
+   "mixpanel_visibility": 0.03333,
+   "mixpanel_avg_position": 1
+  },
+  {
+   "id": "65414e9b-6faa-4ae2-aa18-a91908763b97",
+   "text": "What are the best tools that combine product analytics and session replay?",
+   "topic": "Session replay, experiments & feature flags",
+   "mixpanel_visibility": 0.43333,
+   "mixpanel_avg_position": 4.15
+  },
+  {
+   "id": "f8a4f63d-e135-4295-8dfa-a5d9fc13bd1f",
+   "text": "What is the difference between an A/B test and a feature rollout?",
+   "topic": "Session replay, experiments & feature flags",
+   "mixpanel_visibility": 0,
+   "mixpanel_avg_position": null
+  },
+  {
+   "id": "fa97c00b-b55d-471d-94aa-4631defe1b6a",
+   "text": "What are the best session replay tools that mask sensitive data for privacy compliance?",
+   "topic": "Session replay, experiments & feature flags",
+   "mixpanel_visibility": 0,
+   "mixpanel_avg_position": null
+  },
+  {
+   "id": "c3be360c-999b-44b4-999b-cf597eafe1b9",
+   "text": "What are the best feature flag tools?",
+   "topic": "Session replay, experiments & feature flags",
+   "mixpanel_visibility": 0,
+   "mixpanel_avg_position": null
+  },
+  {
+   "id": "13369fa0-f22b-48aa-99e1-5a88c3dc5618",
+   "text": "What do product teams say are the pros and cons of session replay tools?",
+   "topic": "Session replay, experiments & feature flags",
+   "mixpanel_visibility": 0.13333,
+   "mixpanel_avg_position": 1.75
+  },
+  {
+   "id": "0ab30d82-c6b5-42b1-863e-43dc84b167e5",
+   "text": "What are the best A/B testing tools with built-in statistical significance?",
+   "topic": "Session replay, experiments & feature flags",
+   "mixpanel_visibility": 0.03333,
+   "mixpanel_avg_position": 8
+  },
+  {
+   "id": "fe875764-1a6b-4b5f-af54-e6e3d3531c89",
+   "text": "What are the best session replay tools for mobile apps?",
+   "topic": "Session replay, experiments & feature flags",
+   "mixpanel_visibility": 0.04167,
+   "mixpanel_avg_position": 3
+  },
+  {
+   "id": "8012aa9c-e7a6-4e7e-bbfa-d13ea39e9a97",
+   "text": "Feature flags in a dedicated tool vs in my analytics platform: which is easier for engineers and PMs?",
+   "topic": "Session replay, experiments & feature flags",
+   "mixpanel_visibility": 0.5,
+   "mixpanel_avg_position": 4.83333
+  },
+  {
+   "id": "db3dd27f-0d91-4999-8dc4-e0993ad98f81",
+   "text": "What are the best tools for feature rollouts and kill switches?",
+   "topic": "Session replay, experiments & feature flags",
+   "mixpanel_visibility": 0,
+   "mixpanel_avg_position": null
+  },
+  {
+   "id": "3595f987-30fd-40de-b1d5-5218e422d408",
+   "text": "What is a feature flag and why do teams use them?",
+   "topic": "Session replay, experiments & feature flags",
+   "mixpanel_visibility": 0,
+   "mixpanel_avg_position": null
+  },
+  {
+   "id": "6440d987-8222-420a-9a23-fe77b8ac56ff",
+   "text": "How do I calculate sample size for a product experiment?",
+   "topic": "Session replay, experiments & feature flags",
+   "mixpanel_visibility": 0,
+   "mixpanel_avg_position": null
+  },
+  {
+   "id": "d2a9a208-1ebb-4131-8b1e-56aa48befffa",
+   "text": "What is session replay and how do product teams use it?",
+   "topic": "Session replay, experiments & feature flags",
+   "mixpanel_visibility": 0.21,
+   "mixpanel_avg_position": 3.66667
+  },
+  {
+   "id": "f8962c99-5c81-4381-b69f-17776cb5648e",
+   "text": "What are the best A/B testing tools for product teams?",
+   "topic": "Session replay, experiments & feature flags",
+   "mixpanel_visibility": 0.2,
+   "mixpanel_avg_position": 6.33333
+  },
+  {
+   "id": "3681e922-b7c3-4f31-a4d9-c1b1b4aeafc8",
+   "text": "Session replay vs user interviews: which is better for finding onboarding friction?",
+   "topic": "Session replay, experiments & feature flags",
+   "mixpanel_visibility": 0,
+   "mixpanel_avg_position": null
+  }
+ ]
+}

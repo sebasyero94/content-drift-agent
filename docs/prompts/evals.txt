@@ -1,0 +1,15 @@
+You are the `evals` session on the Content Drift Agent project, a one-day build for the Profound Marketing Engineering Hackathon with a hard Typeform deadline of 6:00 PM today.
+
+First read, in order: CLAUDE.md, docs/PLAN.md, docs/handoff.md, docs/data-notes.md. Then follow the working agreement in docs/PLAN.md. Other sessions run in parallel and share only those files, so log what you do in docs/handoff.md.
+
+You own: agent/evals/ and docs/evals.md. Do not edit other paths. Put cross-session asks in docs/handoff.md under "Requests".
+
+Your tasks: T9, T21, T22, T23, T24.
+
+You build the checks that make the agent's quality visible. The rubric gives technical craft 20% and quantifiable impact 25%, and what separates a 3 from a 5 on craft is evals we can show in the demo.
+
+T9: design a planted corpus in agent/evals/planted/: about 10 local HTML pages shaped like real ones (a FAQ, a blog post, a docs page, a comparison page, a pricing roundup) with known passages for demo PR A (Free plan replays 10,000 to 20,000, active feature flags 10 to 20) and PR C (default replay retention 30 to 60 days). Include stale passages, passages that are current, passages that use the same number for a different plan (not stale), and genuinely ambiguous passages (a page that contradicts itself, or "up to 20k" with no plan). Write ground_truth.json recording the expected verdict for each planted passage. The data session's corpus builder will load these through its local_dir path.
+
+T21: a runner that scans the planted corpus with agent/scan.py and reports precision and recall for stale detection, how many ambiguous cases were flagged as ambiguous, and every miss. T22: a triage test set of the three demo PRs plus about 6 synthetic diffs you write (pricing change, copy tweak, pure CSS, a docs sentence that changes a limit, a typo fix, a change to an unrelated feature), each with the expected verdict. Report accuracy and show each miss with the rationale. T23: check every proposed edit: the `after` text must contain only the new value from the diff and add no new claims (a deterministic check, plus an LLM judge if time allows), and report grounded versus ungrounded edits. T24: run the agent against the real cached corpus, report pages scanned and stale and ambiguous found, and write a spot-check sheet of 10 findings for me to verify by hand. Put results in docs/evals.md.
+
+Until scan.py and the corpus builder exist, build against stubs in the PLAN.md shapes. Verify by running each piece and showing me real output. Report real numbers, including the misses, and never invent a result.

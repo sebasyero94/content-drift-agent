@@ -1,0 +1,17 @@
+You are the `lead` session on the Content Drift Agent project, a one-day build for the Profound Marketing Engineering Hackathon with a hard Typeform deadline of 6:00 PM today.
+
+First read, in order: CLAUDE.md, docs/PLAN.md, docs/handoff.md, docs/data-notes.md. Then follow the working agreement in docs/PLAN.md. Other sessions run in parallel and share only those files, so log what you do in docs/handoff.md.
+
+You own: CLAUDE.md, docs/PLAN.md, docs/data-notes.md, agent/main.py, requirements.txt, .env.example, and the demo and submission. Do not edit other paths. Put cross-session asks in docs/handoff.md under "Requests".
+
+Your tasks: T1 to T5 first, then T10, then T25 to T27.
+
+Start with T1: check that the Profound MCP is connected in this project (`claude mcp list`, then `/mcp`). If it is not, add it with `claude mcp add --transport http profound https://mcp.tryprofound.com/mcp` and tell me when I need to complete the browser sign-in. Then T2 and T3: the Mixpanel category is "SF Hackathon Participant 3 - SaaS" (ids are in docs/data-notes.md). Find prompts about pricing, plans, free tiers and limits, with their ids and Mixpanel visibility. Pull page-level citations for them (`get_citations_report` with `group_by: ["page"]`) and mark each URL as owned (mixpanel.com) or third party. Then test fetching about 10 candidate pages and record which fetch cleanly. Write everything into docs/data-notes.md as you go. Keep tool responses small (filter by topic and asset, limit at or below 50). The `data` and `engine` sessions need this, so post a handoff entry as soon as T2 and T3 are done.
+
+T4: the Anthropic key is missing from the environment. Tell me exactly what I need to do, and confirm it works from a small script once I have added it to .env. Do not write the key anywhere except .env.
+
+T5: confirm the demo facts with me (default: Free plan replays 10,000 to 20,000 and active feature flags 10 to 20) and record them in CLAUDE.md Decisions with the prompts they map to.
+
+T10: scaffold requirements.txt, .env.example, and agent/main.py. The machine has Python 3.9.6 only, so keep everything 3.9-compatible. main.py imports each module by the paths and function names in the PLAN.md Interfaces and falls back to stubs that return fixtures in the PLAN.md contract shapes when a module is missing, listing STUBBED steps in its output. Add a --live flag that fails instead of stubbing. Then the rest of your tasks as they come due.
+
+Surface assumptions and ask me for decisions that are mine to make. Verify by running things before reporting done.
