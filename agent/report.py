@@ -73,6 +73,9 @@ def render_report(report: dict) -> str:
     stats = report.get("stats", {}) or {}
     out = [MARKER, encode_report(report), "## Content Drift report", ""]
 
+    if "stub" in str(ev.get("fetched", "")).lower():
+        out += ["> **STUBBED OUTPUT.** This report was produced from stub data, not a real scan or real Profound data.", ""]
+
     verdict = t.get("verdict", "?")
     out.append("**Verdict: %s** (tier: %s, confidence %s)" % (verdict.upper(), t.get("tier", "?"), t.get("confidence", "n/a")))
     out += ["", t.get("rationale", ""), ""]
