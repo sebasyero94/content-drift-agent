@@ -1,0 +1,50 @@
+[
+ {
+  "url": "https://youtube.com/watch?v=0PtM76cSX6k&vl=en",
+  "reason": "no extractable text (164 chars; likely JS-rendered or media page)",
+  "status": 200,
+  "owner": "third_party",
+  "citation_share": 0.00705,
+  "fetched_at": "2026-10-03T13:29:27-0700"
+ },
+ {
+  "url": "https://kameleoon.com/blog/top-feature-flag-management-tools",
+  "reason": "HTTP 403",
+  "status": 403,
+  "owner": "third_party",
+  "citation_share": 0.00704,
+  "fetched_at": "2026-10-03T13:29:27-0700"
+ },
+ {
+  "url": "https://reddit.com/r/devops/comments/t9kdyg/what_feature_toggleflag_service_are_you_using/",
+  "reason": "no extractable text (0 chars; likely JS-rendered or media page)",
+  "status": 200,
+  "owner": "third_party",
+  "citation_share": 0.00481,
+  "fetched_at": "2026-10-03T13:29:28-0700"
+ },
+ {
+  "url": "https://youtube.com/watch?v=mWo0SUX2yGs",
+  "reason": "no extractable text (164 chars; likely JS-rendered or media page)",
+  "status": 200,
+  "owner": "third_party",
+  "citation_share": 0.00387,
+  "fetched_at": "2026-10-03T13:29:28-0700"
+ },
+ {
+  "url": "https://youtube.com/watch?v=acJ5ZUlysQA",
+  "reason": "no extractable text (164 chars; likely JS-rendered or media page)",
+  "status": 200,
+  "owner": "third_party",
+  "citation_share": 0.00344,
+  "fetched_at": "2026-10-03T13:29:29-0700"
+ },
+ {
+  "url": "https://reddit.com/r/SoftwareEngineering/comments/17o7rsj/to_feature_flag_or_to_not_feature_flag/",
+  "reason": "no extractable text (0 chars; likely JS-rendered or media page)",
+  "status": 200,
+  "owner": "third_party",
+  "citation_share": 0.0034,
+  "fetched_at": "2026-10-03T13:29:29-0700"
+ }
+]

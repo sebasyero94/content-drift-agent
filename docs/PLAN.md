@@ -139,9 +139,9 @@ Owner tags are in brackets. Time-boxes assume roughly 4.5 hours total. Adjust if
   - Done when: `python -m agent.main --pr <url>` runs end to end on stubs and lists STUBBED steps.
 - [ ] **T11** `[plumbing]` PR diff reader using the GitHub API (`gh` is available) (10 min)
   - Done when: `get_pr_diff` returns a correct `PRDiff` for demo PR A.
-- [ ] **T12** `[data]` Profound client: `get_related_prompts` and `get_cited_pages`, with real MCP responses cached to `agent/profound/fixtures/` (20 min)
+- [x] **T12** `[data]` Profound client: `get_related_prompts` and `get_cited_pages`, with real MCP responses cached to `agent/profound/fixtures/` (20 min)
   - Done when: both return real cached data for the facts in PR A, stamped `cached` with a fetch date.
-- [ ] **T13** `[data]` Corpus builder: fetch, clean and cache pages, split into passages that contain the searchable fact, and load local pages from a directory (20 min)
+- [x] **T13** `[data]` Corpus builder: fetch, clean and cache pages, split into passages that contain the searchable fact, and load local pages from a directory (20 min)
   - Done when: a corpus builds from real URLs (cached to disk) and from `agent/evals/planted/`.
 - [ ] **T14** `[engine]` Fact-delta extractor from a diff, including `search_terms` (15 min)
   - Done when: PR A yields two correct deltas, PR B yields none, PR C yields one.

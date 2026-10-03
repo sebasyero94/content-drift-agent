@@ -14,6 +14,17 @@ Cross-session asks. Say who it is for and what you need.
 - (none) The Anthropic key is in `.env` and verified (see the 2026-10-03 lead T4 entry). Still open: the GitHub secret, which `plumbing` T6 needs the user to set once the repo exists.
 
 ## Log
+2026-10-03 · data · T12, T13
+- Done, run on PR A facts (replays 10,000→20,000, flags 10→20): `get_related_prompts` returned 9 prompts, `get_cited_pages` 62 PageRefs (61 third party + mixpanel.com/pricing/ owned), `build_corpus` 58 pages OK + 6 failed (3 youtube and 2 reddit: no extractable text; kameleoon.com: HTTP 403). Offline replay (`offline=True` / `CORPUS_OFFLINE=1`) rebuilds the same 58 from disk.
+- Files: `agent/profound/{client.py,corpus.py,__init__.py}`, `fixtures/{prompts.json,citations.json,_build_fixtures.py}` (real MCP output, fetched 2026-10-03, window 2026-09-03..10-02), `fixtures/corpus_cache/` (3.4 MB, **commit it**: the Action replays it).
+- Interfaces (PLAN shapes kept; extra keys only): prompts and PageRefs also carry `data_source:"cached"`, `fetched`; prompts add `match_terms`; Pages add `passage_context` (nearest heading per passage, parallel to `passages`) and `source` (`web` or `local:<file>`). `provenance()` in client.py gives the "from cache, fetched <date>" line for reports.
+- **Failures are not in the returned list**: call `agent.profound.corpus.last_failures()` (also `corpus_cache/failures.json`) -> [{url, reason, status, owner, citation_share}]. Report them in output, do not hide.
+- Page.cached = True when served from the disk cache. First fetch run is cached=False.
+- `engine`/`main`: for the owned docs and seline pass `extra_urls=["https://docs.mixpanel.com/docs/session-replay","https://seline.com/blog/mixpanel-pricing"]` (mixpanel.com/pricing/ is already a ref). Extra URLs get the lowest citation_share seen, per PLAN rule. `main` should call `get_cited_pages` with `[p["id"] for p in triage["evidence"]["prompts"]]`.
+- `local_dir` (for `evals`): .html/.htm/.md/.txt. Optional metadata: HTML `<meta name="owner|citation_share|prompt_ids|url" content=..>` or `<link rel=canonical>`; markdown front matter (`url:`, `owner:`, `citation_share:`, `prompt_ids:`). Defaults: owner owned, url `local/<file>`, citation_share = lowest in run.
+- Gotchas: (1) mapping delta→prompt is by keyword/topic overlap (none of the 25 prompts is about pricing); say so in triage. (2) Citations cached for 7 prompts only (top 12 pages each); 2 of the 9 related prompts (d2a9a208, 13369fa0) have no cached citations and are skipped, not guessed. (3) citation_share of a PageRef = mean of its per-prompt shares over requested prompts with cached data (0 where not cited). (4) Real pages: mixpanel.com/pricing has "10K session replays / month" and "Up to 10 active feature flags"; docs has 10k, 20k, "stored for 30 days"; seline "Around 10,000". Passages also include site mega-menu noise (~160 passages per mixpanel.com page); the scan should pre-filter by search_terms. (5) Page text is verbatim, whitespace-normalised, so `before` strings match the passage exactly.
+- Next: could cache citations for the 2 missing prompts, or add `terms=` prefilter if `engine` wants it. Ask via Requests.
+
 2026-10-03 · lead · T4 (partial)
 - `ANTHROPIC_API_KEY` is in `.env`. `python -m agent.main --check-key` returned OK for `claude-sonnet-5-5` and `claude-haiku-4-5-20251001`. All sessions can now call the API from scripts (load `.env` via python-dotenv).
 - Replay decision stands: Profound data is replayed from cache and labeled. Still no confirmed API key for Profound.
